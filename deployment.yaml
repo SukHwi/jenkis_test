@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: study
+spec:
+  selector:
+    matchLabels:
+      app: study
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: study
+    spec:
+      containers:
+      - image: harbor.ksign.com/study/study:latest
+        name: study
+        imagePullSecrets:
+        - name: regcred
+        ports:
+        - containerPort: 4885
+      volumes:
+      - name: mariadb-persistent-storage
+        configMap:
+          name: mariadb-initdb-config # configMap 설정
+      - name: mairadb-data
+        persistentVolumeClaim:
+          claimName: mariadb-pv-claim # pv 볼륨 설정    
