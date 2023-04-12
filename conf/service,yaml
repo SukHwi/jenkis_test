@@ -5,10 +5,10 @@ metadata:
   labels:
     app: study
 spec:
-  type: ClusterIP
-  selector:
-    app: study
+  type: LoadBalancer
   ports:
     - protocol: TCP
       port: 4885
       targetPort: 4885
+  selector:
+    app: study

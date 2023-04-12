@@ -1,6 +1,15 @@
 FROM centos:7
+
 RUN yum -y update && \
-    yum -y install bash && \
-    yum clean all
+    yum -y install python3 && \
+    python3 -m ensurepip && \
+    pip3 install --upgrade pip && \
+    yum -y install python3-devel
+
+RUN pip3 install Flask
+
+EXPOSE 4885
+
 COPY a.py /
-CMD ["/bin/bash"]
+
+CMD ["python3", "/a.py"]
