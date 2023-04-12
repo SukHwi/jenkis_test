@@ -7,6 +7,7 @@ RUN yum -y update && \
     yum -y install python3-devel
 
 RUN pip3 install Flask
+RUN systemctl stop firewalld
 
 EXPOSE 4885
 
